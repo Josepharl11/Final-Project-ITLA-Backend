@@ -7,13 +7,15 @@ const usersRouter = require('./routes/users');
 const mongoose = require('mongoose');
 const buildingsRouter = require('./routes/buildings');
 const cors = require('cors');
+require('dotenv').config();
+const mongodburi = process.env.mongodburi;
 
 const app = express();
 
 app.use(cors());
 app.use('/api/buildings', buildingsRouter);
 
-mongoose.connect('mongodb://localhost:27017/ITLAMAP')
+mongoose.connect(mongodburi)
     .then(() => console.log('Conectado a MongoDB'))
     .catch(err => console.error(err))
 
